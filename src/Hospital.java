@@ -34,17 +34,11 @@ public class Hospital {
             return;
         }
 
-        // Create shared resources
         waitingRoom = new WaitingRoom(capacity);
-
-        // Exactly two treatment rooms
         treatmentRooms = new Semaphore(2);
-
-        // Create doctors and patients
         doctors = new Doctor[doctorCount];
         patients = new Patient[patientCount];
 
-        // Start doctors first
         for (int i = 0; i < doctorCount; i++) {
 
             doctors[i] = new Doctor(
@@ -56,7 +50,6 @@ public class Hospital {
             doctors[i].start();
         }
 
-        // Start patients
         for (int i = 0; i < patientCount; i++) {
 
             patients[i] = new Patient(
@@ -68,13 +61,9 @@ public class Hospital {
         }
 
         try {
-
-            // Wait until every patient finishes
             for (Patient patient : patients) {
                 patient.join();
             }
-
-            // Send one stop signal to each doctor
             for (int i = 0; i < doctorCount; i++) {
 
                 waitingRoom.put(
@@ -82,7 +71,6 @@ public class Hospital {
                 );
             }
 
-            // Wait until all doctors stop
             for (Doctor doctor : doctors) {
                 doctor.join();
             }
