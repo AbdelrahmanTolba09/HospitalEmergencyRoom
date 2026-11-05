@@ -19,7 +19,6 @@ public class WaitingRoom {
         mutex = new Semaphore(1);
     }
 
-    // Producer: Patient enters the waiting room
     public void put(Patient patient)
             throws InterruptedException {
 
@@ -61,7 +60,6 @@ public class WaitingRoom {
         full.release();
     }
 
-    // Consumer: Doctor takes a patient
     public Patient take() throws InterruptedException {
 
         full.acquire();

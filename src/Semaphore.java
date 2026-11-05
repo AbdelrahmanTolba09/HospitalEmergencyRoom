@@ -7,7 +7,6 @@ public class Semaphore {
         this.permits = permits;
     }
 
-    // Acquire a resource
     public synchronized void acquire()
             throws InterruptedException {
 
@@ -18,7 +17,6 @@ public class Semaphore {
         permits--;
     }
 
-    // Try to acquire within a time limit
     public synchronized boolean tryAcquire(long timeoutMillis)
             throws InterruptedException {
 
@@ -43,7 +41,6 @@ public class Semaphore {
         return true;
     }
 
-    // Release a resource
     public synchronized void release() {
 
         permits++;

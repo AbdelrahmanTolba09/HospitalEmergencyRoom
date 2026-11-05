@@ -14,7 +14,6 @@ public class Patient extends Thread {
         this.waitingRoom = waitingRoom;
     }
 
-    // Special object used to stop doctors
     private Patient() {
         poison = true;
     }
@@ -31,21 +30,19 @@ public class Patient extends Thread {
         return "P" + id;
     }
 
-    // Doctor calls this if treatment room is unavailable
+
     public synchronized void retryTreatment() {
 
         retry = true;
         notifyAll();
     }
 
-    // Doctor calls this after treatment finishes
     public synchronized void finishTreatment() {
 
         treated = true;
         notifyAll();
     }
 
-    // Patient waits for treatment result
     private synchronized boolean waitForResult()
             throws InterruptedException {
 

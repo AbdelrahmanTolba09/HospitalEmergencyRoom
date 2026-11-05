@@ -30,10 +30,9 @@ public class Doctor extends Thread {
 
             while (true) {
 
-                // Wait until a patient is available
                 Patient patient = waitingRoom.take();
 
-                // Stop signal
+
                 if (patient.isPoison()) {
                     break;
                 }
@@ -87,7 +86,7 @@ public class Doctor extends Thread {
                                     + patient.getPatientName() + "."
                     );
 
-                    // Random treatment duration: 1 to 3 seconds
+
                     int treatmentTime =
                             1000 + random.nextInt(2001);
 
